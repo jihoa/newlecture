@@ -1,0 +1,2 @@
+# newlecture
+newlecture강의
