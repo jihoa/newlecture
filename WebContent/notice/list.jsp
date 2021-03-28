@@ -1,10 +1,12 @@
-<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-
-<!DOCTYPE html>
+    <!DOCTYPE html>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@ page import="com.newlecture.web.entity.*" %>
 <html>
 
 <head>
@@ -12,7 +14,7 @@
     <meta charset="UTF-8">
     <title>공지사항목록</title>
     
-    <link href="/newle/css/customer/layout.css" type="text/css" rel="stylesheet" />
+    <link href="/prac/css/customer/layout.css" type="text/css" rel="stylesheet" />
     <style>
     
         #visual .content-container{	
@@ -27,7 +29,37 @@
 
 <body>
     <!-- header 부분 -->
+<%
 
+String url = "jdbc:oracle:thin:@10.10.0.131:1521:M2";
+String sql = "SELECT * FROM NOTICE1";
+
+	Class.forName("oracle.jdbc.driver.OracleDriver");
+	Connection con= DriverManager.getConnection(url,"cli","cli1993");
+	Statement st = con.createStatement();
+	ResultSet rs= st.executeQuery(sql);
+
+	
+	
+	ArrayList<Notice> list = new ArrayList<Notice>();
+	
+
+
+
+	while(rs.next()){
+		
+
+		Notice n = new Notice();
+		n.setId(rs.getInt("ID"));
+		n.setTitle(rs.getString("TITLE"));
+		n.setWriterId(rs.getString("WRITER_ID"));
+		n.setHit(rs.getString("HIT"));
+		list.add(n);
+	}
+
+	rs.close();
+
+%>
     <header id="header">
         
         <div class="content-container">
@@ -176,26 +208,74 @@
 						</tr>
 					</thead>
 					<tbody>
-					
-					
-					<%-- <%
-					List<Notice> list = (List<Notice>)request.getAttribute("list");
-					for(Notice n : list) {
-						pageContext.setAttribute("n", n);
-					%> --%>
-					
-					<c:forEach var="n" items="${list}" > 
+						
+	
+				<%
+
+				for(int i=0; i<list.size() ; i++){
+
+				
+				%>			
 					<tr>
-						<td>${n.id}</td>
-						<td class="title indent text-align-left"><a href="detail?id=${n.id}">${n.title}</a></td>
-						<td>${n.writerId}</td>
-						<td>${n.regdate}</td>
-						<td>${n.hit}</td>
+						<td><%= list.get(i).getId()%></td>
+						<td class="title indent text-align-left"><a href="detail.jsp?id=<%= list.get(i).getId()%>"><%= list.get(i).getTitle()%></a></td>
+						<td><%= list.get(i).getWriterId()%></td>
+						<td>
+							<%= list.get(i).getId()%>
+						</td>
+						<td><%= list.get(i).getHit()%></td>
 					</tr>
-					</c:forEach>
-							
-					<%--<%} %> --%>
 					
+				<%
+				
+				}
+				%>
+		
+						
+						
+						
+						<!-- 	
+					<tr>
+						<td>7</td>
+						<td class="title indent text-align-left"><a href="detail.html">스프링 DI 예제 코드</a></td>
+						<td>newlec</td>
+						<td>
+							2019-08-15		
+						</td>
+						<td>131</td>
+					</tr>
+							
+					<tr>
+						<td>6</td>
+						<td class="title indent text-align-left"><a href="detail.html">뉴렉쌤 9월 초 국기과정 모집 안내</a></td>
+						<td>newlec</td>
+						<td>
+							2019-06-11		
+						</td>
+						<td>517</td>
+					</tr>
+							
+					<tr>
+						<td>5</td>
+						<td class="title indent text-align-left"><a href="detail.html">뉴렉처 강의 수강 방식 안내</a></td>
+						<td>newlec</td>
+						<td>
+							2019-05-24		
+						</td>
+						<td>448</td>
+					</tr>
+							
+					<tr>
+						<td>4</td>
+						<td class="title indent text-align-left"><a href="detail.html">자바 구조적인 프로그래밍 강의 예제 파일</a></td>
+						<td>newlec</td>
+						<td>
+							2019-04-24		
+						</td>
+						<td>520</td>
+					</tr>
+					
+					 -->
 					
 					
 					</tbody>
@@ -208,33 +288,21 @@
 			</div>
 
 			<div class="margin-top align-center pager">	
-	<c:set var="page" value="${(param.p ==null)?1:param.p}"/>
-	<c:set var="startNum" value="${page- (page-1)%5}"/>
-	<c:set var="lastNum" value="23"/>
 		
 	<div>
-		<c:if test="${startNum>1 }">
-			<a href="?p=${startNum-1}&t=&q=" class="btn btn-prev" >이전</a>
-		</c:if>
-		<c:if test="${startNum<=1 }">
-			<span class="btn btn-prev" onclick="alert('이전 페이지가 없습니다.');">이전</span>		
-		</c:if>
+		
+		
+		<span class="btn btn-prev" onclick="alert('이전 페이지가 없습니다.');">이전</span>
 		
 	</div>
-	
-		
 	<ul class="-list- center">
-		<c:forEach var="i" begin="0" end="4">
-		<li><a class="-text- orange bold" href="?p=${startNum+i}&t=&q=" >${startNum+i}</a></li>
-		</c:forEach>		
+		<li><a class="-text- orange bold" href="?p=1&t=&q=" >1</a></li>
+				
 	</ul>
 	<div>
-		<c:if test="${startNum+5<lastNum }">
-			<a href="?p=${startNum+5}&t=&q=" class="btn btn-next" >다음</a>
-		</c:if>
-		<c:if test="${startNum+5>=lastNum  }">
+		
+		
 			<span class="btn btn-next" onclick="alert('다음 페이지가 없습니다.');">다음</span>
-		</c:if>
 		
 	</div>
 	
