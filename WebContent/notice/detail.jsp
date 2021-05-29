@@ -8,7 +8,7 @@
 <head>
     <title>코딩 전문가를 만들기 위한 온라인 강의 시스템</title>
     <meta charset="UTF-8">
-    <title>공지사항목록</title>
+    <title>공지사항목록</title> 
     
     <link href="/newle/css/customer/layout.css" type="text/css" rel="stylesheet" />
     <style>
