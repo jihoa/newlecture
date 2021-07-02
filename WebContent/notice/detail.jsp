@@ -41,6 +41,16 @@
 		
 		
 		rs.next();
+		
+		
+		String title = rs.getString("TITLE");
+		
+		
+		
+		rs.close();
+		st.close();
+		con.close();		
+		
 	%>    
 
 	<header id="header">
@@ -168,7 +178,7 @@
 							<tbody>
 								<tr>
 									<th>제목</th>
-									<td class="text-align-left text-indent text-strong text-orange" colspan="3"><%=rs.getInt("TITLE")%></td>
+									<td class="text-align-left text-indent text-strong text-orange" colspan="3"><%=title%></td>
 								</tr>
 								<tr>
 									<th>작성일</th>
@@ -259,13 +269,6 @@
     </body>
     
     </html>
-    
 
-<%
-	rs.close();
-	st.close();
-	con.close();
-
-%>
     
     
