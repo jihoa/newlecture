@@ -1,131 +1,106 @@
-<%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <!DOCTYPE html>
+<%@ page contentType="text/html;charset=MS949"%>
+<%
+	request.setCharacterEncoding("MS949");
+%>
+<meta http-equiv="Content-Type" content="text/html; charset=ksc5601" />
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
-<%@ page import="com.newlecture.web.entity.*" %>
 <html>
 
 <head>
-    <title>ì½”ë”© ì „ë¬¸ê°€ë¥¼ ë§Œë“¤ê¸° ìœ„í•œ ì˜¨ë¼ì¸ ê°•ì˜ ì‹œìŠ¤í…œ</title>
-    <meta charset="UTF-8">
-    <title>ê³µì§€ì‚¬í•­ëª©ë¡</title>
-    
-    <link href="/prac/css/customer/layout.css" type="text/css" rel="stylesheet" />
-    <style>
-    
-        #visual .content-container{	
-            height:inherit;
-            display:flex; 
-            align-items: center;
-            
-            background: url("../../images/customer/visual.png") no-repeat center;
-        }
-    </style>
+<title>ÄÚµù Àü¹®°¡¸¦ ¸¸µé±â À§ÇÑ ¿Â¶óÀÎ °­ÀÇ ½Ã½ºÅÛ</title>
+<meta charset="UTF-8">
+<title>°øÁö»çÇ×¸ñ·Ï</title>
+
+<link href="../css/customer/layout.css" type="text/css" rel="stylesheet" />
+<style>
+#visual .content-container {
+	height: inherit;
+	display: flex;
+	align-items: center;
+	background: url("../../images/customer/visual.png") no-repeat center;
+}
+</style>
 </head>
 
 <body>
-    <!-- header ë¶€ë¶„ -->
-<%
+	<!-- header ºÎºĞ -->
+	<%
+		String url = "jdbc:oracle:thin:@10.10.0.131:1521:M2";
+		String sql = "SELECT * FROM NOTICE1";
 
-String url = "jdbc:oracle:thin:@10.10.0.131:1521:M2";
-String sql = "SELECT * FROM NOTICE1";
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection con = DriverManager.getConnection(url, "cli", "cli1993");
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+	%>
+	<header id="header">
 
-	Class.forName("oracle.jdbc.driver.OracleDriver");
-	Connection con= DriverManager.getConnection(url,"cli","cli1993");
-	Statement st = con.createStatement();
-	ResultSet rs= st.executeQuery(sql);
+		<div class="content-container">
+			<!-- ---------------------------<header>--------------------------------------- -->
 
-	
-	
-	ArrayList<Notice> list = new ArrayList<Notice>();
-	
+			<h1 id="logo">
+				<a href="/index.html"> <img src="/images/logo.png" alt="´º·ºÃ³ ¿Â¶óÀÎ" />
 
+				</a>
+			</h1>
 
+			<section>
+				<h1 class="hidden">Çì´õ</h1>
 
-	while(rs.next()){
-		
+				<nav id="main-menu">
+					<h1>¸ŞÀÎ¸Ş´º</h1>
+					<ul>
+						<li><a href="/guide">ÇĞ½À°¡ÀÌµå</a></li>
 
-		Notice n = new Notice();
-		n.setId(rs.getInt("ID"));
-		n.setTitle(rs.getString("TITLE"));
-		n.setWriterId(rs.getString("WRITER_ID"));
-		n.setHit(rs.getString("HIT"));
-		list.add(n);
-	}
+						<li><a href="/course">°­ÁÂ¼±ÅÃ</a></li>
+						<li><a href="/answeris/index">AnswerIs</a></li>
+					</ul>
+				</nav>
 
-	rs.close();
+				<div class="sub-menu">
 
-%>
-    <header id="header">
-        
-        <div class="content-container">
-            <!-- ---------------------------<header>--------------------------------------- -->
+					<section id="search-form">
+						<h1>°­ÁÂ°Ë»ö Æû</h1>
+						<form action="/course">
+							<fieldset>
+								<legend>°úÁ¤°Ë»öÇÊµå</legend>
+								<label>°úÁ¤°Ë»ö</label>
+								<input type="text" name="q" value="" />
+								<input type="submit" value="°Ë»ö" />
+							</fieldset>
+						</form>
+					</section>
 
-            <h1 id="logo">
-                <a href="/index.html">
-                    <img src="/images/logo.png" alt="ë‰´ë ‰ì²˜ ì˜¨ë¼ì¸" />
+					<nav id="acount-menu">
+						<h1 class="hidden">È¸¿ø¸Ş´º</h1>
+						<ul>
+							<li><a href="/index.html">HOME</a></li>
+							<li><a href="/member/login.html">·Î±×ÀÎ</a></li>
+							<li><a href="/member/agree.html">È¸¿ø°¡ÀÔ</a></li>
+						</ul>
+					</nav>
 
-                </a>
-            </h1>
+					<nav id="member-menu" class="linear-layout">
+						<h1 class="hidden">°í°´¸Ş´º</h1>
+						<ul class="linear-layout">
+							<li><a href="/member/home"><img src="/images/txt-mypage.png" alt="¸¶ÀÌÆäÀÌÁö" /></a></li>
+							<li><a href="/notice/list.html"><img src="/images/txt-customer.png" alt="°í°´¼¾ÅÍ" /></a></li>
+						</ul>
+					</nav>
 
-            <section>
-                <h1 class="hidden">í—¤ë”</h1>
+				</div>
+			</section>
 
-                <nav id="main-menu">
-                    <h1>ë©”ì¸ë©”ë‰´</h1>
-                    <ul>
-                        <li><a href="/guide">í•™ìŠµê°€ì´ë“œ</a></li>
+		</div>
 
-                        <li><a href="/course">ê°•ì¢Œì„ íƒ</a></li>
-                        <li><a href="/answeris/index">AnswerIs</a></li>
-                    </ul>
-                </nav>
-
-                <div class="sub-menu">
-
-                    <section id="search-form">
-                        <h1>ê°•ì¢Œê²€ìƒ‰ í¼</h1>
-                        <form action="/course">
-                            <fieldset>
-                                <legend>ê³¼ì •ê²€ìƒ‰í•„ë“œ</legend>
-                                <label>ê³¼ì •ê²€ìƒ‰</label>
-                                <input type="text" name="q" value="" />
-                                <input type="submit" value="ê²€ìƒ‰" />
-                            </fieldset>
-                        </form>
-                    </section>
-
-                    <nav id="acount-menu">
-                        <h1 class="hidden">íšŒì›ë©”ë‰´</h1>
-                        <ul>
-                            <li><a href="/index.html">HOME</a></li>
-                            <li><a href="/member/login.html">ë¡œê·¸ì¸</a></li>
-                            <li><a href="/member/agree.html">íšŒì›ê°€ì…</a></li>
-                        </ul>
-                    </nav>
-
-                    <nav id="member-menu" class="linear-layout">
-                        <h1 class="hidden">ê³ ê°ë©”ë‰´</h1>
-                        <ul class="linear-layout">
-                            <li><a href="/member/home"><img src="/images/txt-mypage.png" alt="ë§ˆì´í˜ì´ì§€" /></a></li>
-                            <li><a href="/notice/list.html"><img src="/images/txt-customer.png" alt="ê³ ê°ì„¼í„°" /></a></li>
-                        </ul>
-                    </nav>
-
-                </div>
-            </section>
-
-        </div>
-        
-    </header>
+	</header>
 
 	<!-- --------------------------- <visual> --------------------------------------- -->
-	<!-- visual ë¶€ë¶„ -->
-	
+	<!-- visual ºÎºĞ -->
+
 	<div id="visual">
 		<div class="content-container"></div>
 	</div>
@@ -134,110 +109,111 @@ String sql = "SELECT * FROM NOTICE1";
 		<div class="content-container clearfix">
 
 			<!-- --------------------------- aside --------------------------------------- -->
-			<!-- aside ë¶€ë¶„ -->
+			<!-- aside ºÎºĞ -->
 
 
 			<aside class="aside">
-				<h1>ê³ ê°ì„¼í„°</h1>
+				<h1>°í°´¼¾ÅÍ</h1>
 
 				<nav class="menu text-menu first margin-top">
-					<h1>ê³ ê°ì„¼í„°ë©”ë‰´</h1>
+					<h1>°í°´¼¾ÅÍ¸Ş´º</h1>
 					<ul>
-						<li><a class="current"  href="/customer/notice">ê³µì§€ì‚¬í•­</a></li>
-						<li><a class=""  href="/customer/faq">ìì£¼í•˜ëŠ” ì§ˆë¬¸</a></li>
-						<li><a class="" href="/customer/question">ìˆ˜ê°•ë¬¸ì˜</a></li>
-						<li><a class="" href="/customer/event">ì´ë²¤íŠ¸</a></li>
-						
+						<li><a class="current" href="/customer/notice">°øÁö»çÇ×</a></li>
+						<li><a class="" href="/customer/faq">ÀÚÁÖÇÏ´Â Áú¹®</a></li>
+						<li><a class="" href="/customer/question">¼ö°­¹®ÀÇ</a></li>
+						<li><a class="" href="/customer/event">ÀÌº¥Æ®</a></li>
+
 					</ul>
 				</nav>
 
 
-	<nav class="menu">
-		<h1>í˜‘ë ¥ì—…ì²´</h1>
-		<ul>
-			<li><a target="_blank" href="http://www.notepubs.com"><img src="/images/notepubs.png" alt="ë…¸íŠ¸íìŠ¤" /></a></li>
-			<li><a target="_blank" href="http://www.namoolab.com"><img src="/images/namoolab.png" alt="ë‚˜ë¬´ë©ì—°êµ¬ì†Œ" /></a></li>
-						
-		</ul>
-	</nav>
-					
+				<nav class="menu">
+					<h1>Çù·Â¾÷Ã¼</h1>
+					<ul>
+						<li><a target="_blank" href="http://www.notepubs.com"><img src="/images/notepubs.png" alt="³ëÆ®Æà½º" /></a></li>
+						<li><a target="_blank" href="http://www.namoolab.com"><img src="/images/namoolab.png" alt="³ª¹«·¦¿¬±¸¼Ò" /></a></li>
+
+					</ul>
+				</nav>
+
 			</aside>
 			<!-- --------------------------- main --------------------------------------- -->
 
 
 
-		<main class="main">
-			<h2 class="main title">ê³µì§€ì‚¬í•­</h2>
-			
+			<main class="main">
+			<h2 class="main title">°øÁö»çÇ×</h2>
+
 			<div class="breadcrumb">
-				<h3 class="hidden">ê²½ë¡œ</h3>
+				<h3 class="hidden">°æ·Î</h3>
 				<ul>
 					<li>home</li>
-					<li>ê³ ê°ì„¼í„°</li>
-					<li>ê³µì§€ì‚¬í•­</li>
+					<li>°í°´¼¾ÅÍ</li>
+					<li>°øÁö»çÇ×</li>
 				</ul>
 			</div>
-			
+
 			<div class="search-form margin-top first align-right">
-				<h3 class="hidden">ê³µì§€ì‚¬í•­ ê²€ìƒ‰í¼</h3>
+				<h3 class="hidden">°øÁö»çÇ× °Ë»öÆû</h3>
 				<form class="table-form">
 					<fieldset>
-						<legend class="hidden">ê³µì§€ì‚¬í•­ ê²€ìƒ‰ í•„ë“œ</legend>
-						<label class="hidden">ê²€ìƒ‰ë¶„ë¥˜</label>
+						<legend class="hidden">°øÁö»çÇ× °Ë»ö ÇÊµå</legend>
+						<label class="hidden">°Ë»öºĞ·ù</label>
 						<select name="f">
-							<option  value="title">ì œëª©</option>
-							<option  value="writerId">ì‘ì„±ì</option>
-						</select> 
-						<label class="hidden">ê²€ìƒ‰ì–´</label>
-						<input type="text" name="q" value=""/>
-						<input class="btn btn-search" type="submit" value="ê²€ìƒ‰" />
+							<option value="title">Á¦¸ñ</option>
+							<option value="writerId">ÀÛ¼ºÀÚ</option>
+						</select>
+						<label class="hidden">°Ë»ö¾î</label>
+						<input type="text" name="q" value="" />
+						<input class="btn btn-search" type="submit" value="°Ë»ö" />
 					</fieldset>
 				</form>
 			</div>
-			
+
 			<div class="notice margin-top">
-				<h3 class="hidden">ê³µì§€ì‚¬í•­ ëª©ë¡</h3>
+				<h3 class="hidden">°øÁö»çÇ× ¸ñ·Ï</h3>
 				<table class="table">
 					<thead>
 						<tr>
-							<th class="w60">ë²ˆí˜¸</th>
-							<th class="expand">ì œëª©</th>
-							<th class="w100">ì‘ì„±ì</th>
-							<th class="w100">ì‘ì„±ì¼</th>
-							<th class="w60">ì¡°íšŒìˆ˜</th>
+							<th class="w60">¹øÈ£</th>
+							<th class="expand">Á¦¸ñ</th>
+							<th class="w100">ÀÛ¼ºÀÚ</th>
+							<th class="w100">ÀÛ¼ºÀÏ</th>
+							<th class="w60">Á¶È¸¼ö</th>
 						</tr>
 					</thead>
 					<tbody>
-						
-	
-				<%
 
-				for(int i=0; i<list.size() ; i++){
 
-				
-				%>			
-					<tr>
-						<td><%= list.get(i).getId()%></td>
-						<td class="title indent text-align-left"><a href="detail.jsp?id=<%= list.get(i).getId()%>"><%= list.get(i).getTitle()%></a></td>
-						<td><%= list.get(i).getWriterId()%></td>
-						<td>
-							<%= list.get(i).getId()%>
-						</td>
-						<td><%= list.get(i).getHit()%></td>
-					</tr>
-					
-				<%
-				
-				}
-				%>
-		
-						
-						
-						
+						<%
+							while (rs.next()) {
+						%>
+
+
+						<tr>
+							<td><%=rs.getInt("ID")%></td>
+							<td class="title indent text-align-left">
+								<a href="detail.html"><%=rs.getInt("ID")%></a>
+							</td>
+							<td><%=rs.getInt("ID")%></td>
+							<td>
+								<%=rs.getInt("ID")%>
+							</td>
+							<td><%=rs.getInt("ID")%></td>
+						</tr>
+
+
+						<%
+							}
+						%>
+
+
+
+
 						<!-- 	
 					<tr>
 						<td>7</td>
-						<td class="title indent text-align-left"><a href="detail.html">ìŠ¤í”„ë§ DI ì˜ˆì œ ì½”ë“œ</a></td>
+						<td class="title indent text-align-left"><a href="detail.html">½ºÇÁ¸µ DI ¿¹Á¦ ÄÚµå</a></td>
 						<td>newlec</td>
 						<td>
 							2019-08-15		
@@ -247,7 +223,7 @@ String sql = "SELECT * FROM NOTICE1";
 							
 					<tr>
 						<td>6</td>
-						<td class="title indent text-align-left"><a href="detail.html">ë‰´ë ‰ìŒ¤ 9ì›” ì´ˆ êµ­ê¸°ê³¼ì • ëª¨ì§‘ ì•ˆë‚´</a></td>
+						<td class="title indent text-align-left"><a href="detail.html">´º·º½Ü 9¿ù ÃÊ ±¹±â°úÁ¤ ¸ğÁı ¾È³»</a></td>
 						<td>newlec</td>
 						<td>
 							2019-06-11		
@@ -257,7 +233,7 @@ String sql = "SELECT * FROM NOTICE1";
 							
 					<tr>
 						<td>5</td>
-						<td class="title indent text-align-left"><a href="detail.html">ë‰´ë ‰ì²˜ ê°•ì˜ ìˆ˜ê°• ë°©ì‹ ì•ˆë‚´</a></td>
+						<td class="title indent text-align-left"><a href="detail.html">´º·ºÃ³ °­ÀÇ ¼ö°­ ¹æ½Ä ¾È³»</a></td>
 						<td>newlec</td>
 						<td>
 							2019-05-24		
@@ -267,7 +243,7 @@ String sql = "SELECT * FROM NOTICE1";
 							
 					<tr>
 						<td>4</td>
-						<td class="title indent text-align-left"><a href="detail.html">ìë°” êµ¬ì¡°ì ì¸ í”„ë¡œê·¸ë˜ë° ê°•ì˜ ì˜ˆì œ íŒŒì¼</a></td>
+						<td class="title indent text-align-left"><a href="detail.html">ÀÚ¹Ù ±¸Á¶ÀûÀÎ ÇÁ·Î±×·¡¹Ö °­ÀÇ ¿¹Á¦ ÆÄÀÏ</a></td>
 						<td>newlec</td>
 						<td>
 							2019-04-24		
@@ -276,77 +252,80 @@ String sql = "SELECT * FROM NOTICE1";
 					</tr>
 					
 					 -->
-					
-					
+
+
 					</tbody>
 				</table>
 			</div>
-			
+
 			<div class="indexer margin-top align-right">
-				<h3 class="hidden">í˜„ì¬ í˜ì´ì§€</h3>
-				<div><span class="text-orange text-strong">1</span> / 1 pages</div>
+				<h3 class="hidden">ÇöÀç ÆäÀÌÁö</h3>
+				<div>
+					<span class="text-orange text-strong">1</span> / 1 pages
+				</div>
 			</div>
 
-			<div class="margin-top align-center pager">	
-		
-	<div>
-		
-		
-		<span class="btn btn-prev" onclick="alert('ì´ì „ í˜ì´ì§€ê°€ ì—†ìŠµë‹ˆë‹¤.');">ì´ì „</span>
-		
-	</div>
-	<ul class="-list- center">
-		<li><a class="-text- orange bold" href="?p=1&t=&q=" >1</a></li>
-				
-	</ul>
-	<div>
-		
-		
-			<span class="btn btn-next" onclick="alert('ë‹¤ìŒ í˜ì´ì§€ê°€ ì—†ìŠµë‹ˆë‹¤.');">ë‹¤ìŒ</span>
-		
-	</div>
-	
+			<div class="margin-top align-center pager">
+
+				<div>
+
+
+					<span class="btn btn-prev" onclick="alert('ÀÌÀü ÆäÀÌÁö°¡ ¾ø½À´Ï´Ù.');">ÀÌÀü</span>
+
+				</div>
+				<ul class="-list- center">
+					<li><a class="-text- orange bold" href="?p=1&t=&q=">1</a></li>
+
+				</ul>
+				<div>
+
+
+					<span class="btn btn-next" onclick="alert('´ÙÀ½ ÆäÀÌÁö°¡ ¾ø½À´Ï´Ù.');">´ÙÀ½</span>
+
+				</div>
+
 			</div>
-		</main>
-		
-			
+			</main>
+
+
 		</div>
 	</div>
 
-    <!-- ------------------- <footer> --------------------------------------- -->
+	<!-- ------------------- <footer> --------------------------------------- -->
 
 
 
-        <footer id="footer">
-            <div class="content-container">
-                <h2 id="footer-logo"><img src="/images/logo-footer.png" alt="íšŒì‚¬ì •ë³´"></h2>
-    
-                <div id="company-info">
-                    <dl>
-                        <dt>ì£¼ì†Œ:</dt>
-                        <dd>ì„œìš¸íŠ¹ë³„ì‹œ </dd>
-                        <dt>ê´€ë¦¬ìë©”ì¼:</dt>
-                        <dd>admin@newlecture.com</dd>
-                    </dl>
-                    <dl>
-                        <dt>ì‚¬ì—…ì ë“±ë¡ë²ˆí˜¸:</dt>
-                        <dd>111-11-11111</dd>
-                        <dt>í†µì‹  íŒë§¤ì—…:</dt>
-                        <dd>ì‹ ê³ ì œ 1111 í˜¸</dd>
-                    </dl>
-                    <dl>
-                        <dt>ìƒí˜¸:</dt>
-                        <dd>ë‰´ë ‰ì²˜</dd>
-                        <dt>ëŒ€í‘œ:</dt>
-                        <dd>í™ê¸¸ë™</dd>
-                        <dt>ì „í™”ë²ˆí˜¸:</dt>
-                        <dd>111-1111-1111</dd>
-                    </dl>
-                    <div id="copyright" class="margin-top">Copyright â“’ newlecture.com 2012-2014 All Right Reserved.
-                        Contact admin@newlecture.com for more information</div>
-                </div>
-            </div>
-        </footer>
-    </body>
-    
-    </html>
+	<footer id="footer">
+		<div class="content-container">
+			<h2 id="footer-logo">
+				<img src="/images/logo-footer.png" alt="È¸»çÁ¤º¸">
+			</h2>
+
+			<div id="company-info">
+				<dl>
+					<dt>ÁÖ¼Ò:</dt>
+					<dd>¼­¿ïÆ¯º°½Ã</dd>
+					<dt>°ü¸®ÀÚ¸ŞÀÏ:</dt>
+					<dd>admin@newlecture.com</dd>
+				</dl>
+				<dl>
+					<dt>»ç¾÷ÀÚ µî·Ï¹øÈ£:</dt>
+					<dd>111-11-11111</dd>
+					<dt>Åë½Å ÆÇ¸Å¾÷:</dt>
+					<dd>½Å°íÁ¦ 1111 È£</dd>
+				</dl>
+				<dl>
+					<dt>»óÈ£:</dt>
+					<dd>´º·ºÃ³</dd>
+					<dt>´ëÇ¥:</dt>
+					<dd>È«±æµ¿</dd>
+					<dt>ÀüÈ­¹øÈ£:</dt>
+					<dd>111-1111-1111</dd>
+				</dl>
+				<div id="copyright" class="margin-top">Copyright ¨Ï newlecture.com 2012-2014 All Right Reserved. Contact admin@newlecture.com for more information</div>
+			</div>
+		</div>
+	</footer>
+</body>
+
+</html>

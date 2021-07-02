@@ -1,10 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <!DOCTYPE html>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -12,7 +6,7 @@
     <meta charset="UTF-8">
     <title>공지사항목록</title>
     
-    <link href="/prac/css/customer/layout.css" type="text/css" rel="stylesheet" />
+    <link href="../css/customer/layout.css" type="text/css" rel="stylesheet" />
     <style>
     
         #visual .content-container{	
@@ -27,21 +21,7 @@
 
 <body>
     <!-- header 부분 -->
-<%
 
-String url = "jdbc:oracle:thin:@10.10.0.131:1521:M2";
-String sql = "SELECT * FROM NOTICE1";
-
-	Class.forName("oracle.jdbc.driver.OracleDriver");
-	Connection con= DriverManager.getConnection(url,"cli","cli1993");
-	Statement st = con.createStatement();
-	ResultSet rs= st.executeQuery(sql);
-
-
-
-
-
-%>
     <header id="header">
         
         <div class="content-container">
@@ -190,34 +170,17 @@ String sql = "SELECT * FROM NOTICE1";
 						</tr>
 					</thead>
 					<tbody>
-						
-						
-		<%
-			while(rs.next()){
-		
-		%>
-						
 							
 					<tr>
-						<td><%= rs.getInt("ID")%></td>
-						<td class="title indent text-align-left"><a href="detail.html"><%= rs.getInt("ID")%></a></td>
-						<td><%= rs.getInt("ID")%></td>
+						<td>8</td>
+						<td class="title indent text-align-left"><a href="detail.html">스프링 8강까지의 예제 코드</a></td>
+						<td>newlec</td>
 						<td>
-							<%= rs.getInt("ID")%>	
+							2019-08-18		
 						</td>
-						<td><%= rs.getInt("ID")%></td>
+						<td>146</td>
 					</tr>
-					
-					
-		<%
-		
-			}
-		%>
-						
-						
-						
-						
-						<!-- 	
+							
 					<tr>
 						<td>7</td>
 						<td class="title indent text-align-left"><a href="detail.html">스프링 DI 예제 코드</a></td>
@@ -257,8 +220,6 @@ String sql = "SELECT * FROM NOTICE1";
 						</td>
 						<td>520</td>
 					</tr>
-					
-					 -->
 					
 					
 					</tbody>
