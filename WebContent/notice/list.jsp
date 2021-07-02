@@ -329,3 +329,11 @@
 </body>
 
 </html>
+
+<%
+	rs.close();
+	st.close();
+	con.close();
+
+%>
+
