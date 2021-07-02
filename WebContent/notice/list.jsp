@@ -1,8 +1,4 @@
-<%@ page contentType="text/html;charset=MS949"%>
-<%
-	request.setCharacterEncoding("MS949");
-%>
-<meta http-equiv="Content-Type" content="text/html; charset=ksc5601" />
+<%@ page language="java" contentType="text/html;" pageEncoding="UTF-8"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.DriverManager"%>
@@ -10,9 +6,9 @@
 <html>
 
 <head>
-<title>ÄÚµù Àü¹®°¡¸¦ ¸¸µé±â À§ÇÑ ¿Â¶óÀÎ °­ÀÇ ½Ã½ºÅÛ</title>
+<title>ì½”ë”© ì „ë¬¸ê°€ë¥¼ ë§Œë“¤ê¸° ìœ„í•œ ì˜¨ë¼ì¸ ê°•ì˜ ì‹œìŠ¤í…œ</title>
 <meta charset="UTF-8">
-<title>°øÁö»çÇ×¸ñ·Ï</title>
+<title>ê³µì§€ì‚¬í•­ëª©ë¡</title>
 
 <link href="../css/customer/layout.css" type="text/css" rel="stylesheet" />
 <style>
@@ -26,7 +22,7 @@
 </head>
 
 <body>
-	<!-- header ºÎºÐ -->
+	<!-- header ë¶€ë¶„ -->
 	<%
 		String url = "jdbc:oracle:thin:@10.10.0.131:1521:M2";
 		String sql = "SELECT * FROM NOTICE1";
@@ -42,20 +38,20 @@
 			<!-- ---------------------------<header>--------------------------------------- -->
 
 			<h1 id="logo">
-				<a href="/index.html"> <img src="/images/logo.png" alt="´º·ºÃ³ ¿Â¶óÀÎ" />
+				<a href="/index.html"> <img src="/images/logo.png" alt="ë‰´ë ‰ì²˜ ì˜¨ë¼ì¸" />
 
 				</a>
 			</h1>
 
 			<section>
-				<h1 class="hidden">Çì´õ</h1>
+				<h1 class="hidden">í—¤ë”</h1>
 
 				<nav id="main-menu">
-					<h1>¸ÞÀÎ¸Þ´º</h1>
+					<h1>ë©”ì¸ë©”ë‰´</h1>
 					<ul>
-						<li><a href="/guide">ÇÐ½À°¡ÀÌµå</a></li>
+						<li><a href="/guide">í•™ìŠµê°€ì´ë“œ</a></li>
 
-						<li><a href="/course">°­ÁÂ¼±ÅÃ</a></li>
+						<li><a href="/course">ê°•ì¢Œì„ íƒ</a></li>
 						<li><a href="/answeris/index">AnswerIs</a></li>
 					</ul>
 				</nav>
@@ -63,31 +59,31 @@
 				<div class="sub-menu">
 
 					<section id="search-form">
-						<h1>°­ÁÂ°Ë»ö Æû</h1>
+						<h1>ê°•ì¢Œê²€ìƒ‰ í¼</h1>
 						<form action="/course">
 							<fieldset>
-								<legend>°úÁ¤°Ë»öÇÊµå</legend>
-								<label>°úÁ¤°Ë»ö</label>
+								<legend>ê³¼ì •ê²€ìƒ‰í•„ë“œ</legend>
+								<label>ê³¼ì •ê²€ìƒ‰</label>
 								<input type="text" name="q" value="" />
-								<input type="submit" value="°Ë»ö" />
+								<input type="submit" value="ê²€ìƒ‰" />
 							</fieldset>
 						</form>
 					</section>
 
 					<nav id="acount-menu">
-						<h1 class="hidden">È¸¿ø¸Þ´º</h1>
+						<h1 class="hidden">íšŒì›ë©”ë‰´</h1>
 						<ul>
 							<li><a href="/index.html">HOME</a></li>
-							<li><a href="/member/login.html">·Î±×ÀÎ</a></li>
-							<li><a href="/member/agree.html">È¸¿ø°¡ÀÔ</a></li>
+							<li><a href="/member/login.html">ë¡œê·¸ì¸</a></li>
+							<li><a href="/member/agree.html">íšŒì›ê°€ìž…</a></li>
 						</ul>
 					</nav>
 
 					<nav id="member-menu" class="linear-layout">
-						<h1 class="hidden">°í°´¸Þ´º</h1>
+						<h1 class="hidden">ê³ ê°ë©”ë‰´</h1>
 						<ul class="linear-layout">
-							<li><a href="/member/home"><img src="/images/txt-mypage.png" alt="¸¶ÀÌÆäÀÌÁö" /></a></li>
-							<li><a href="/notice/list.html"><img src="/images/txt-customer.png" alt="°í°´¼¾ÅÍ" /></a></li>
+							<li><a href="/member/home"><img src="/images/txt-mypage.png" alt="ë§ˆì´íŽ˜ì´ì§€" /></a></li>
+							<li><a href="/notice/list.html"><img src="/images/txt-customer.png" alt="ê³ ê°ì„¼í„°" /></a></li>
 						</ul>
 					</nav>
 
@@ -99,7 +95,7 @@
 	</header>
 
 	<!-- --------------------------- <visual> --------------------------------------- -->
-	<!-- visual ºÎºÐ -->
+	<!-- visual ë¶€ë¶„ -->
 
 	<div id="visual">
 		<div class="content-container"></div>
@@ -109,29 +105,29 @@
 		<div class="content-container clearfix">
 
 			<!-- --------------------------- aside --------------------------------------- -->
-			<!-- aside ºÎºÐ -->
+			<!-- aside ë¶€ë¶„ -->
 
 
 			<aside class="aside">
-				<h1>°í°´¼¾ÅÍ</h1>
+				<h1>ê³ ê°ì„¼í„°</h1>
 
 				<nav class="menu text-menu first margin-top">
-					<h1>°í°´¼¾ÅÍ¸Þ´º</h1>
+					<h1>ê³ ê°ì„¼í„°ë©”ë‰´</h1>
 					<ul>
-						<li><a class="current" href="/customer/notice">°øÁö»çÇ×</a></li>
-						<li><a class="" href="/customer/faq">ÀÚÁÖÇÏ´Â Áú¹®</a></li>
-						<li><a class="" href="/customer/question">¼ö°­¹®ÀÇ</a></li>
-						<li><a class="" href="/customer/event">ÀÌº¥Æ®</a></li>
+						<li><a class="current" href="/customer/notice">ê³µì§€ì‚¬í•­</a></li>
+						<li><a class="" href="/customer/faq">ìžì£¼í•˜ëŠ” ì§ˆë¬¸</a></li>
+						<li><a class="" href="/customer/question">ìˆ˜ê°•ë¬¸ì˜</a></li>
+						<li><a class="" href="/customer/event">ì´ë²¤íŠ¸</a></li>
 
 					</ul>
 				</nav>
 
 
 				<nav class="menu">
-					<h1>Çù·Â¾÷Ã¼</h1>
+					<h1>í˜‘ë ¥ì—…ì²´</h1>
 					<ul>
-						<li><a target="_blank" href="http://www.notepubs.com"><img src="/images/notepubs.png" alt="³ëÆ®Æà½º" /></a></li>
-						<li><a target="_blank" href="http://www.namoolab.com"><img src="/images/namoolab.png" alt="³ª¹«·¦¿¬±¸¼Ò" /></a></li>
+						<li><a target="_blank" href="http://www.notepubs.com"><img src="/images/notepubs.png" alt="ë…¸íŠ¸íŽìŠ¤" /></a></li>
+						<li><a target="_blank" href="http://www.namoolab.com"><img src="/images/namoolab.png" alt="ë‚˜ë¬´ëž©ì—°êµ¬ì†Œ" /></a></li>
 
 					</ul>
 				</nav>
@@ -142,44 +138,44 @@
 
 
 			<main class="main">
-			<h2 class="main title">°øÁö»çÇ×</h2>
+			<h2 class="main title">ê³µì§€ì‚¬í•­</h2>
 
 			<div class="breadcrumb">
-				<h3 class="hidden">°æ·Î</h3>
+				<h3 class="hidden">ê²½ë¡œ</h3>
 				<ul>
 					<li>home</li>
-					<li>°í°´¼¾ÅÍ</li>
-					<li>°øÁö»çÇ×</li>
+					<li>ê³ ê°ì„¼í„°</li>
+					<li>ê³µì§€ì‚¬í•­</li>
 				</ul>
 			</div>
 
 			<div class="search-form margin-top first align-right">
-				<h3 class="hidden">°øÁö»çÇ× °Ë»öÆû</h3>
+				<h3 class="hidden">ê³µì§€ì‚¬í•­ ê²€ìƒ‰í¼</h3>
 				<form class="table-form">
 					<fieldset>
-						<legend class="hidden">°øÁö»çÇ× °Ë»ö ÇÊµå</legend>
-						<label class="hidden">°Ë»öºÐ·ù</label>
+						<legend class="hidden">ê³µì§€ì‚¬í•­ ê²€ìƒ‰ í•„ë“œ</legend>
+						<label class="hidden">ê²€ìƒ‰ë¶„ë¥˜</label>
 						<select name="f">
-							<option value="title">Á¦¸ñ</option>
-							<option value="writerId">ÀÛ¼ºÀÚ</option>
+							<option value="title">ì œëª©</option>
+							<option value="writerId">ìž‘ì„±ìž</option>
 						</select>
-						<label class="hidden">°Ë»ö¾î</label>
+						<label class="hidden">ê²€ìƒ‰ì–´</label>
 						<input type="text" name="q" value="" />
-						<input class="btn btn-search" type="submit" value="°Ë»ö" />
+						<input class="btn btn-search" type="submit" value="ê²€ìƒ‰" />
 					</fieldset>
 				</form>
 			</div>
 
 			<div class="notice margin-top">
-				<h3 class="hidden">°øÁö»çÇ× ¸ñ·Ï</h3>
+				<h3 class="hidden">ê³µì§€ì‚¬í•­ ëª©ë¡</h3>
 				<table class="table">
 					<thead>
 						<tr>
-							<th class="w60">¹øÈ£</th>
-							<th class="expand">Á¦¸ñ</th>
-							<th class="w100">ÀÛ¼ºÀÚ</th>
-							<th class="w100">ÀÛ¼ºÀÏ</th>
-							<th class="w60">Á¶È¸¼ö</th>
+							<th class="w60">ë²ˆí˜¸</th>
+							<th class="expand">ì œëª©</th>
+							<th class="w100">ìž‘ì„±ìž</th>
+							<th class="w100">ìž‘ì„±ì¼</th>
+							<th class="w60">ì¡°íšŒìˆ˜</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -193,7 +189,7 @@
 						<tr>
 							<td><%=rs.getInt("ID")%></td>
 							<td class="title indent text-align-left">
-								<a href="detail.html"><%=rs.getInt("ID")%></a>
+								<a href="detail.jsp?id=<%=rs.getInt("ID")%>"><%=rs.getInt("ID")%></a>
 							</td>
 							<td><%=rs.getInt("ID")%></td>
 							<td>
@@ -213,7 +209,7 @@
 						<!-- 	
 					<tr>
 						<td>7</td>
-						<td class="title indent text-align-left"><a href="detail.html">½ºÇÁ¸µ DI ¿¹Á¦ ÄÚµå</a></td>
+						<td class="title indent text-align-left"><a href="detail.html">ìŠ¤í”„ë§ DI ì˜ˆì œ ì½”ë“œ</a></td>
 						<td>newlec</td>
 						<td>
 							2019-08-15		
@@ -223,7 +219,7 @@
 							
 					<tr>
 						<td>6</td>
-						<td class="title indent text-align-left"><a href="detail.html">´º·º½Ü 9¿ù ÃÊ ±¹±â°úÁ¤ ¸ðÁý ¾È³»</a></td>
+						<td class="title indent text-align-left"><a href="detail.html">ë‰´ë ‰ìŒ¤ 9ì›” ì´ˆ êµ­ê¸°ê³¼ì • ëª¨ì§‘ ì•ˆë‚´</a></td>
 						<td>newlec</td>
 						<td>
 							2019-06-11		
@@ -233,7 +229,7 @@
 							
 					<tr>
 						<td>5</td>
-						<td class="title indent text-align-left"><a href="detail.html">´º·ºÃ³ °­ÀÇ ¼ö°­ ¹æ½Ä ¾È³»</a></td>
+						<td class="title indent text-align-left"><a href="detail.html">ë‰´ë ‰ì²˜ ê°•ì˜ ìˆ˜ê°• ë°©ì‹ ì•ˆë‚´</a></td>
 						<td>newlec</td>
 						<td>
 							2019-05-24		
@@ -243,7 +239,7 @@
 							
 					<tr>
 						<td>4</td>
-						<td class="title indent text-align-left"><a href="detail.html">ÀÚ¹Ù ±¸Á¶ÀûÀÎ ÇÁ·Î±×·¡¹Ö °­ÀÇ ¿¹Á¦ ÆÄÀÏ</a></td>
+						<td class="title indent text-align-left"><a href="detail.html">ìžë°” êµ¬ì¡°ì ì¸ í”„ë¡œê·¸ëž˜ë° ê°•ì˜ ì˜ˆì œ íŒŒì¼</a></td>
 						<td>newlec</td>
 						<td>
 							2019-04-24		
@@ -259,7 +255,7 @@
 			</div>
 
 			<div class="indexer margin-top align-right">
-				<h3 class="hidden">ÇöÀç ÆäÀÌÁö</h3>
+				<h3 class="hidden">í˜„ìž¬ íŽ˜ì´ì§€</h3>
 				<div>
 					<span class="text-orange text-strong">1</span> / 1 pages
 				</div>
@@ -270,7 +266,7 @@
 				<div>
 
 
-					<span class="btn btn-prev" onclick="alert('ÀÌÀü ÆäÀÌÁö°¡ ¾ø½À´Ï´Ù.');">ÀÌÀü</span>
+					<span class="btn btn-prev" onclick="alert('ì´ì „ íŽ˜ì´ì§€ê°€ ì—†ìŠµë‹ˆë‹¤.');">ì´ì „</span>
 
 				</div>
 				<ul class="-list- center">
@@ -280,7 +276,7 @@
 				<div>
 
 
-					<span class="btn btn-next" onclick="alert('´ÙÀ½ ÆäÀÌÁö°¡ ¾ø½À´Ï´Ù.');">´ÙÀ½</span>
+					<span class="btn btn-next" onclick="alert('ë‹¤ìŒ íŽ˜ì´ì§€ê°€ ì—†ìŠµë‹ˆë‹¤.');">ë‹¤ìŒ</span>
 
 				</div>
 
@@ -298,31 +294,31 @@
 	<footer id="footer">
 		<div class="content-container">
 			<h2 id="footer-logo">
-				<img src="/images/logo-footer.png" alt="È¸»çÁ¤º¸">
+				<img src="/images/logo-footer.png" alt="íšŒì‚¬ì •ë³´">
 			</h2>
 
 			<div id="company-info">
 				<dl>
-					<dt>ÁÖ¼Ò:</dt>
-					<dd>¼­¿ïÆ¯º°½Ã</dd>
-					<dt>°ü¸®ÀÚ¸ÞÀÏ:</dt>
+					<dt>ì£¼ì†Œ:</dt>
+					<dd>ì„œìš¸íŠ¹ë³„ì‹œ</dd>
+					<dt>ê´€ë¦¬ìžë©”ì¼:</dt>
 					<dd>admin@newlecture.com</dd>
 				</dl>
 				<dl>
-					<dt>»ç¾÷ÀÚ µî·Ï¹øÈ£:</dt>
+					<dt>ì‚¬ì—…ìž ë“±ë¡ë²ˆí˜¸:</dt>
 					<dd>111-11-11111</dd>
-					<dt>Åë½Å ÆÇ¸Å¾÷:</dt>
-					<dd>½Å°íÁ¦ 1111 È£</dd>
+					<dt>í†µì‹  íŒë§¤ì—…:</dt>
+					<dd>ì‹ ê³ ì œ 1111 í˜¸</dd>
 				</dl>
 				<dl>
-					<dt>»óÈ£:</dt>
-					<dd>´º·ºÃ³</dd>
-					<dt>´ëÇ¥:</dt>
-					<dd>È«±æµ¿</dd>
-					<dt>ÀüÈ­¹øÈ£:</dt>
+					<dt>ìƒí˜¸:</dt>
+					<dd>ë‰´ë ‰ì²˜</dd>
+					<dt>ëŒ€í‘œ:</dt>
+					<dd>í™ê¸¸ë™</dd>
+					<dt>ì „í™”ë²ˆí˜¸:</dt>
 					<dd>111-1111-1111</dd>
 				</dl>
-				<div id="copyright" class="margin-top">Copyright ¨Ï newlecture.com 2012-2014 All Right Reserved. Contact admin@newlecture.com for more information</div>
+				<div id="copyright" class="margin-top">Copyright â“’ newlecture.com 2012-2014 All Right Reserved. Contact admin@newlecture.com for more information</div>
 			</div>
 		</div>
 	</footer>

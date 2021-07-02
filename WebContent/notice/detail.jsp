@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html;" pageEncoding="UTF-8"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <html>
 
 <head>
@@ -21,6 +26,22 @@
 
 <body>
     <!-- header 부분 -->
+	<%
+		int id = Integer.parseInt(request.getParameter("id"));
+	
+		String url = "jdbc:oracle:thin:@10.10.0.131:1521:M2";
+		String sql = "SELECT * FROM NOTICE1 where id = ? ";
+
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection con = DriverManager.getConnection(url, "cli", "cli1993");
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, id);
+		ResultSet rs = st.executeQuery();
+		
+		
+		rs.next();
+	%>    
 
 	<header id="header">
         
@@ -147,7 +168,7 @@
 							<tbody>
 								<tr>
 									<th>제목</th>
-									<td class="text-align-left text-indent text-strong text-orange" colspan="3">스프링 8강까지의 예제 코드</td>
+									<td class="text-align-left text-indent text-strong text-orange" colspan="3"><%=rs.getInt("TITLE")%></td>
 								</tr>
 								<tr>
 									<th>작성일</th>
@@ -238,3 +259,13 @@
     </body>
     
     </html>
+    
+
+<%
+	rs.close();
+	st.close();
+	con.close();
+
+%>
+    
+    
