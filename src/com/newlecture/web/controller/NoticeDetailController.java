@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.newlecture.web.entity.Notice;
+
 /**
  * @author jiho-kim
  *
@@ -46,11 +48,16 @@ public class NoticeDetailController extends HttpServlet{
 			
 			rs.next();
 			
-			
 			String title = rs.getString("TITLE");
 			
+			
+			
+			Notice notice = new Notice( id , title);
+			
+			
+			request.setAttribute("n", notice);
 
-			request.setAttribute("title", title);
+			//request.setAttribute("title", title);
 			
 			rs.close();
 			st.close();

@@ -147,7 +147,7 @@
 							<tbody>
 								<tr>
 									<th>제목</th>
-									<td class="text-align-left text-indent text-strong text-orange" colspan="3"><%=request.getAttribute("title")%></td>
+									<td class="text-align-left text-indent text-strong text-orange" colspan="3">${n.title}</td>
 								</tr>
 								<tr>
 									<th>작성일</th>
