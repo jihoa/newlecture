@@ -14,7 +14,7 @@ pageContext.setAttribute("result","hello");
 	<%=request.getAttribute("result") %>입니다.
 	${requestScope.result}<br >
 	${names[1]}<br >
-	${notice.id}<br >
+	${notice.title}<br >
 	${result}<br >
 	${param.n/2}  <br>
 	${header.accept}
