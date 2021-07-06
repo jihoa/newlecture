@@ -18,5 +18,10 @@ pageContext.setAttribute("result","hello");
 	${result}<br >
 	${param.n/2}  <br>
 	${header.accept}
+<!-- 	하나의 서블릿 페이지에 대한 저장소는 pageContext -->
+<!-- 하나의 Web application에 대한 저장소는 ServletContext(전역 변수와 비슷한 느낌) -->
+<!-- forward 관계에서 사용되는 저장소는 Request -->
+<!-- 특정 Session에 대한 저장소는 Session -->
+<!-- Client에 저장하는 저장소는 Cookie -->
 </body>
 </html>

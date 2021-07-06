@@ -13,24 +13,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/calculator")											//»ç¿ëÀÚ°¡ urlÀ» ÅëÇØ¼­ calculaotr¸¦ ¿äÃ»ÇÏ°ÔµÇ¸é Get ¿äÃ»À»ÇØµµ service°¡ ½ÇÇàµÇ°í POST¸¦ ¿äÃ»ÇØµµ service°¡ ½ÇÇàµÆ´Ù. ±×·±¿äÃ»À» GET POST¿äÃ»À» ±¸ºĞÇØ¾ßÇÒ°æ¿ì¿¡´Â ³ª´­°ÍÀÎ°¡ 
-																	//2°¡Áö ¹æ½ÄÀ¸·Î ¾Ë¾Æº¼°ÍÀÌ´Ù. 1. ¼­ºñ½ºÇÔ¼ö¿¡¼­ ±¸ºĞÁş´Â ¹æ¹ı 2.GET¿äÃ»°ú POST¿äÃ»¿¡ Æ¯È­µÈ ¸Ş¼­µå¸¦ È°¿ëÇØº¸´Â ¹æ¹ı
-public class Calculator extends HttpServlet {						//¼­ºí¸´À¸·Î ¸¸µé±â À§ÇØ ¼­ºí¸´ Å¬·¡½º »ó¼Ó¹Ş±â 
+@WebServlet("/calculator")											//ì‚¬ìš©ìê°€ urlì„ í†µí•´ì„œ calculaotrë¥¼ ìš”ì²­í•˜ê²Œë˜ë©´ Get ìš”ì²­ì„í•´ë„ serviceê°€ ì‹¤í–‰ë˜ê³  POSTë¥¼ ìš”ì²­í•´ë„ serviceê°€ ì‹¤í–‰ëë‹¤. ê·¸ëŸ°ìš”ì²­ì„ GET POSTìš”ì²­ì„ êµ¬ë¶„í•´ì•¼í• ê²½ìš°ì—ëŠ” ë‚˜ëˆŒê²ƒì¸ê°€ 
+																	//2ê°€ì§€ ë°©ì‹ìœ¼ë¡œ ì•Œì•„ë³¼ê²ƒì´ë‹¤. 1. ì„œë¹„ìŠ¤í•¨ìˆ˜ì—ì„œ êµ¬ë¶„ì§“ëŠ” ë°©ë²• 2.GETìš”ì²­ê³¼ POSTìš”ì²­ì— íŠ¹í™”ëœ ë©”ì„œë“œë¥¼ í™œìš©í•´ë³´ëŠ” ë°©ë²•
+public class Calculator extends HttpServlet {						//ì„œë¸”ë¦¿ìœ¼ë¡œ ë§Œë“¤ê¸° ìœ„í•´ ì„œë¸”ë¦¿ í´ë˜ìŠ¤ ìƒì†ë°›ê¸° 
 
 	@Override
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Cookie[] cookies =request.getCookies();	
 		
 		String exp ="0";														
-		if(cookies != null)		//¹®Á¦´Â ÄíÅ°°¡ NullÀÏ°æ¿ìµµ ÀÖ±â¶§¹®¿¡ ºê¶ó¿ìÀú¿¡ ÄíÅ°°¡ ¾Æ¿¹¾øÀ¸¸é Null·Î¹İÈ¯
+		if(cookies != null)		//ë¬¸ì œëŠ” ì¿ í‚¤ê°€ Nullì¼ê²½ìš°ë„ ìˆê¸°ë•Œë¬¸ì— ë¸Œë¼ìš°ì €ì— ì¿ í‚¤ê°€ ì•„ì˜ˆì—†ìœ¼ë©´ Nullë¡œë°˜í™˜
 			for(Cookie c : cookies)					
 				if(c.getName().equals("exp")){			
 					exp= c.getValue();				
 					break;									
 				}
 		
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+		//response.setCharacterEncoding("UTF-8");
+		//response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out =response.getWriter();
 		
 		out.write("<!DOCTYPE html>");
@@ -97,17 +97,17 @@ public class Calculator extends HttpServlet {						//¼­ºí¸´À¸·Î ¸¸µé±â À§ÇØ ¼­ºí
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Cookie[] cookies =request.getCookies();											//3.»ç¿ëÀÚ°¡ ÄíÅ°¸¦ º¸³ÂÀ¸´Ï±î ´ÙÀ½¿äÃ»ÀÌ µé¾î¿ÔÀ»‹š º¸³»ÁÙ°ÍÀÌ´Ù. ±×·¯±âÀ§ÇØ¼­ ÄíÅ°¸¦ ÀĞ¾î¾ßÇÑ´Ù. ÄíÅ°¸¦ ÀĞ±âÀ§ÇØ request.getCookie()¸Ş¼Òµå¸¦ »ç¿ëÇÏ°í ÄíÅ°°¡ Cookies¶ó´Â ¹è¿­·Î ÀĞÈ÷±â ¶§¹®¿¡ Cookie[]¶ó´Â ¹è¿­·Î ¼±¾ğÇØÁØ´Ù.
+		Cookie[] cookies =request.getCookies();											//3.ì‚¬ìš©ìê°€ ì¿ í‚¤ë¥¼ ë³´ëƒˆìœ¼ë‹ˆê¹Œ ë‹¤ìŒìš”ì²­ì´ ë“¤ì–´ì™”ì„Â‹Âš ë³´ë‚´ì¤„ê²ƒì´ë‹¤. ê·¸ëŸ¬ê¸°ìœ„í•´ì„œ ì¿ í‚¤ë¥¼ ì½ì–´ì•¼í•œë‹¤. ì¿ í‚¤ë¥¼ ì½ê¸°ìœ„í•´ request.getCookie()ë©”ì†Œë“œë¥¼ ì‚¬ìš©í•˜ê³  ì¿ í‚¤ê°€ Cookiesë¼ëŠ” ë°°ì—´ë¡œ ì½íˆê¸° ë•Œë¬¸ì— Cookie[]ë¼ëŠ” ë°°ì—´ë¡œ ì„ ì–¸í•´ì¤€ë‹¤.
 		
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+		//response.setCharacterEncoding("UTF-8");
+		//response.setContentType("text/html; charset=UTF-8");
 		
 		String value = request.getParameter("value");											
 		String operator = request.getParameter("operator"); 									
 		String dot = request.getParameter("dot");  
 		
 		String exp ="";
-		if(cookies != null)		//¹®Á¦´Â ÄíÅ°°¡ NullÀÏ°æ¿ìµµ ÀÖ±â¶§¹®¿¡ ºê¶ó¿ìÀú¿¡ ÄíÅ°°¡ ¾Æ¿¹¾øÀ¸¸é Null·Î¹İÈ¯
+		if(cookies != null)		//ë¬¸ì œëŠ” ì¿ í‚¤ê°€ Nullì¼ê²½ìš°ë„ ìˆê¸°ë•Œë¬¸ì— ë¸Œë¼ìš°ì €ì— ì¿ í‚¤ê°€ ì•„ì˜ˆì—†ìœ¼ë©´ Nullë¡œë°˜í™˜
 			for(Cookie c : cookies)					
 				if(c.getName().equals("exp")){			
 					exp= c.getValue();				
@@ -115,7 +115,7 @@ public class Calculator extends HttpServlet {						//¼­ºí¸´À¸·Î ¸¸µé±â À§ÇØ ¼­ºí
 				}
 		
 		if(operator != null &&operator.equals("=")) {
-			ScriptEngine engine = new ScriptEngineManager().getEngineByName("graal.js");
+			ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
 			try {
 				exp = String.valueOf(engine.eval(exp));
 			} catch (ScriptException e) {
@@ -124,7 +124,7 @@ public class Calculator extends HttpServlet {						//¼­ºí¸´À¸·Î ¸¸µé±â À§ÇØ ¼­ºí
 			}
 		}
 		else if(operator != null &&operator.equals("C")) {
-			exp="";
+			exp="";//ì¿ í‚¤ì‚­ì œí•˜ê¸°.
 		}
 		else {
 			exp += (value == null)?"":value;
@@ -133,9 +133,9 @@ public class Calculator extends HttpServlet {						//¼­ºí¸´À¸·Î ¸¸µé±â À§ÇØ ¼­ºí
 		}
 		Cookie expCookie =new Cookie("exp",exp);
 		if(operator != null &&operator.equals("C")) {
-			expCookie.setMaxAge(0);
+			expCookie.setMaxAge(0);//ì¿ í‚¤ì‚­ì œí•˜ê¸°.
 		}
-		expCookie.setPath("/calculator");
+		//expCookie.setPath("/calculator");
 		response.addCookie(expCookie);
 		response.sendRedirect("calculator");
 		}
