@@ -19,22 +19,20 @@ public class Add2 extends HttpServlet{
 //		int x = Integer.parseInt(req.getParameter("x"));
 //		int y = Integer.parseInt(req.getParameter("y"));
 		
-		int x=0;
-		int y=0;
+		String[] num_ = req.getParameterValues("num");
+		
+		int result = 0;
 		
 		
-		PrintWriter out = resp.getWriter();
+		for(int i=0; i<num_.length; i++) {
+			int num = Integer.parseInt(num_[i]);
+			result += num;
+		}
 		
-		String temp1 = req.getParameter("x");
-		String temp2 = req.getParameter("y");
 		
-		if(temp1 != null && !temp1.equals(""))
-			x= Integer.parseInt(temp1);
+		resp.getWriter().printf("result is %d\n", result);
+		
+		
 
-		if(temp2 != null && !temp2.equals(""))
-			y= Integer.parseInt(temp2);
-		int hap=x+y;
-
-		out.println(hap);
 	}
 }
