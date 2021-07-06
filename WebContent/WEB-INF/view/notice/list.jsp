@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <title>공지사항목록</title>
     
-    <link href="/css/customer/layout.css" type="text/css" rel="stylesheet" />
+    <link href="/newle/css/customer/layout.css" type="text/css" rel="stylesheet" />
     <style>
     
         #visual .content-container{	

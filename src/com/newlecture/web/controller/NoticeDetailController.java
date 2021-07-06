@@ -21,13 +21,13 @@ public class NoticeDetailController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-	    
-		String url = "jdbc:oracle:thin:@192.168.77.1:1521/xepdb1";
-		String sql = "SELECT * FROM NOTICE WHERE ID=?";
+		
+		String url = "jdbc:oracle:thin:@10.10.0.131:1521:M2";
+		String sql = "SELECT * FROM NOTICE1 WHERE ID=?";
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con= DriverManager.getConnection(url,"NEWLEC","1234");
+			Connection con= DriverManager.getConnection(url, "cli", "cli1993");
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1,id);
 			ResultSet rs= st.executeQuery();
