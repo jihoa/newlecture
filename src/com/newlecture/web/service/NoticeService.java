@@ -31,7 +31,16 @@ public class NoticeService {
 
 		List<Notice> list = new ArrayList<>();
 		
-		String sql="";
+		String sql="SELECT   *\r\n" + 
+				"  FROM   (SELECT   ROWNUM AS NUM, A.*\r\n" + 
+				"            FROM   (  SELECT   *\r\n" + 
+				"                        FROM   NOTICE1 WHERE "+field+" LIKE ? \r\n" + 
+				"                    ORDER BY   REGDATE DESC) A) Z\r\n" + 
+				" WHERE   NUM BETWEEN ? AND ?";
+		
+		
+		// 1, 11, 21, 31 -> 1+(page-1)*10
+		// 10,20, 30, 40 -> page*10
 
 		
 		String url = "jdbc:oracle:thin:@10.10.0.131:1521:M2";
@@ -40,6 +49,10 @@ public class NoticeService {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con= DriverManager.getConnection(url, "cli", "cli1993");
 			PreparedStatement st = con.prepareStatement(sql);
+			System.out.println(sql);
+			st.setString(1, "%" + query + "%");
+			st.setInt(2, 1+(page-1)*10);
+			st.setInt(3, page*10);
 			ResultSet rs= st.executeQuery();
 
 			 while(rs.next()){ 
@@ -119,13 +132,27 @@ public class NoticeService {
 	}
 	
 	public Notice getNextNotice(int id) {
-		Notice notice = null;
+		String sql = "SELECT   *\r\n" + 
+				"  FROM   NOTICE1\r\n" + 
+				" WHERE   ID = (SELECT   ID\r\n" + 
+				"                 FROM   NOTICE1\r\n" + 
+				"                WHERE   REGDATE > (SELECT   REGDATE\r\n" + 
+				"                                     FROM   NOTICE1\r\n" + 
+				"                                    WHERE   ID = 3)\r\n" + 
+				"                        AND ROWNUM = 1)";
 		
-		return notice;
+		return null;
 	}
 	
 	public Notice getPrevNotice(int id) {
-		Notice notice = null;
+		String sql = "SELECT   ID\r\n" + 
+				"  FROM   (  SELECT   *\r\n" + 
+				"              FROM   NOTICE1\r\n" + 
+				"          ORDER BY   REGDATE DESC)\r\n" + 
+				" WHERE   REGDATE < (SELECT   REGDATE\r\n" + 
+				"                      FROM   NOTICE1\r\n" + 
+				"                     WHERE   ID = 3)\r\n" + 
+				"         AND ROWNUM = 1";
 		return null;
 	}	
 	
