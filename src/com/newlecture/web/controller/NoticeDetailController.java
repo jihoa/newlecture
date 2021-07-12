@@ -24,7 +24,7 @@ public class NoticeDetailController extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		NoticeService service = new NoticeService();
-		
+
 		Notice notice = service.getNotice(id);
 		
 		request.setAttribute("n", notice);

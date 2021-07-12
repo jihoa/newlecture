@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.newlecture.web.entity.Notice;
+import com.newlecture.web.entity.NoticeView;
 
 /**
  * @author jiho-kim
@@ -21,17 +22,17 @@ import com.newlecture.web.entity.Notice;
  * 신규개발
  */
 public class NoticeService {
-	public List<Notice> getNoticeList(){
+	public List<NoticeView> getNoticeList(){
 		return getNoticeList("title", "", 1);
 	}
 	
-	public List<Notice> getNoticeList(int page){
+	public List<NoticeView> getNoticeList(int page){
 		return getNoticeList("title", "", page);
 	}
 	
-	public List<Notice> getNoticeList(String field, String query, int page){
+	public List<NoticeView> getNoticeList(String field, String query, int page){
 
-		List<Notice> list = new ArrayList<>();
+		List<NoticeView> list = new ArrayList<>();
 		
 		String sql="SELECT   *\r\n" + 
 				"  FROM   (SELECT   ROWNUM AS NUM, A.*\r\n" + 
@@ -64,16 +65,18 @@ public class NoticeService {
 				Date regdate=rs.getDate("REGDATE"); 
 				String hit=rs.getString("HIT");
 				String files=rs.getString("FILES");
-				String content=rs.getString("CONTENT"); 
+				//String content=rs.getString("CONTENT"); 
+				int cmtCount = rs.getInt("CMT_COUNT");
 
-				Notice notice= new Notice(
+				NoticeView notice= new NoticeView(
 						id,
 						title,
 						writerId,
 						regdate,
 						hit,
 						files,
-						content
+						//content,
+						cmtCount
 						);
 				list.add(notice);
 			} 
