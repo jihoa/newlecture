@@ -34,11 +34,11 @@ public class NoticeService {
 
 		List<NoticeView> list = new ArrayList<>();
 		
-		String sql="SELECT   Z.*, X. \r\n" + 
+		String sql="SELECT   Z.* \r\n" + 
 				"  FROM   (SELECT   ROWNUM AS NUM, A.*\r\n" + 
 				"            FROM   (  SELECT   *\r\n" + 
-				"                        FROM   NOTICE1 WHERE "+field+" LIKE ? \r\n" + 
-				"                    ORDER BY   REGDATE DESC) A) Z  LEFT JOIN COMMENT X ON Z.ID = X.ID   \r\n" + 
+				"                        FROM   NOTICE_VIEW WHERE "+field+" LIKE ? \r\n" + 
+				"                    ORDER BY   REGDATE DESC) A) Z    \r\n" + 
 				" WHERE   NUM BETWEEN ? AND ?";
 		
 		
