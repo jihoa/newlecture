@@ -37,7 +37,7 @@ public class NoticeService {
 		String sql="SELECT   Z.* \r\n" + 
 				"  FROM   (SELECT   ROWNUM AS NUM, A.*\r\n" + 
 				"            FROM   (  SELECT   *\r\n" + 
-				"                        FROM   NOTICE_VIEW WHERE "+field+" LIKE ? \r\n" + 
+				"                        FROM   NOTICE_VIEW1 WHERE "+field+" LIKE ? \r\n" + 
 				"                    ORDER BY   REGDATE DESC) A) Z    \r\n" + 
 				" WHERE   NUM BETWEEN ? AND ?";
 		
