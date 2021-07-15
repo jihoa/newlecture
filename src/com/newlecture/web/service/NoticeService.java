@@ -22,10 +22,52 @@ public class NoticeService {
 		
 		return 0;
 	}
-	public int pubNoticeAll(int[] ids){
-
+	public int pubNoticeAll(int[] oids, int[] cids){
+		
 		return 0;
 	}
+	public int pubNoticeAll(List<String> oids, List<String> cids){
+
+		String oidsCSV = String.join(",", oids);
+		String cidsCSV = String.join(",", cids);
+		
+//		System.out.println(oidsCSV);
+//		System.out.println(cidsCSV);
+		
+		return pubNoticeAll(oidsCSV, cidsCSV);
+	}	
+	public int pubNoticeAll(String oidsCSV, String cidsCSV){
+		
+		int result = 0;
+		
+		
+		String sqlOpen = String.format("UPDATE NOTICE1 SET PUB=1 WHERE ID IN (%s)", oidsCSV);
+		String sqlClose = String.format("UPDATE NOTICE1 SET PUB=0 WHERE ID IN (%s)", cidsCSV);
+		
+		String url = "jdbc:oracle:thin:@10.10.0.131:1521:M2";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con= DriverManager.getConnection(url, "cli", "cli1993");
+			Statement stOpen = con.createStatement();
+			result += stOpen.executeUpdate(sqlOpen);
+			
+			Statement stClose = con.createStatement();
+			result += stOpen.executeUpdate(sqlClose);
+			
+
+				stOpen.close();
+				stClose.close();
+				con.close();
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return result;
+	}		
+	
+	
 	public int insertNotice(Notice notice) {
 		
 		int result = 0;
@@ -77,6 +119,74 @@ public class NoticeService {
 	public List<NoticeView> getNoticeList(int page){
 		return getNoticeList("title", "", page);
 	}
+
+	public List<NoticeView> getNoticePubList(String field, String query, int page){
+		List<NoticeView> list = new ArrayList<>();
+		
+		String sql="SELECT   Z.* \r\n" + 
+				"  FROM   (SELECT   ROWNUM AS NUM, A.*\r\n" + 
+				"            FROM   (  SELECT   *\r\n" + 
+				"                        FROM   NOTICE_VIEW1 WHERE "+field+" LIKE ? \r\n" + 
+				"                    ORDER BY   REGDATE DESC) A) Z    \r\n" + 
+				" WHERE PUB=1 AND NUM BETWEEN ? AND ?";
+		
+		
+		// 1, 11, 21, 31 -> 1+(page-1)*10
+		// 10,20, 30, 40 -> page*10
+
+		
+		String url = "jdbc:oracle:thin:@10.10.0.131:1521:M2";
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con= DriverManager.getConnection(url, "cli", "cli1993");
+			PreparedStatement st = con.prepareStatement(sql);
+			//System.out.println(sql);
+			st.setString(1, "%" + query + "%");
+			st.setInt(2, 1+(page-1)*10);
+			st.setInt(3, page*10);
+			ResultSet rs= st.executeQuery();
+
+			 while(rs.next()){ 
+			 	int id = rs.getInt("ID");
+			 	String title=rs.getString("TITLE");
+				String writerId=rs.getString("WRITER_ID");
+				Date regdate=rs.getDate("REGDATE"); 
+				String hit=rs.getString("HIT");
+				String files=rs.getString("FILES");
+				//String content=rs.getString("CONTENT"); 
+				boolean pub = rs.getBoolean("PUB");
+				int cmtCount = rs.getInt("CMT_COUNT");
+
+				NoticeView notice= new NoticeView(
+						id,
+						title,
+						writerId,
+						regdate,
+						hit,
+						files,
+						//content,
+						pub,
+						cmtCount
+						);
+				list.add(notice);
+			} 
+			 	rs.close();
+				st.close();
+				con.close();
+
+			
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
+		
+		
+	}
+	
 	
 	public List<NoticeView> getNoticeList(String field, String query, int page){
 
