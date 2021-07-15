@@ -28,8 +28,35 @@ public class NoticeService {
 	}
 	public int insertNotice(Notice notice) {
 		
-		return 0;
-	}
+		int result = 0;
+		
+		
+		String sql = "INSERT INTO NOTICE1 (ID, TITLE, CONTENT, WRITER_ID, PUB) VALUES (jindanseq.nextval, ?,?,?,?) ";
+		
+
+		String url = "jdbc:oracle:thin:@10.10.0.131:1521:M2";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con= DriverManager.getConnection(url, "cli", "cli1993");
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, notice.getTitle());
+			st.setString(2, notice.getContent());
+			st.setString(3, notice.getWriterId());
+			st.setBoolean(4, notice.getPub());
+			
+			result = st.executeUpdate();
+
+				st.close();
+				con.close();
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return result;
+	}		
+	
 	public int deleteNotice(int id){
 
 		return 0;
@@ -87,6 +114,7 @@ public class NoticeService {
 				String hit=rs.getString("HIT");
 				String files=rs.getString("FILES");
 				//String content=rs.getString("CONTENT"); 
+				boolean pub = rs.getBoolean("PUB");
 				int cmtCount = rs.getInt("CMT_COUNT");
 
 				NoticeView notice= new NoticeView(
@@ -97,6 +125,7 @@ public class NoticeService {
 						hit,
 						files,
 						//content,
+						pub,
 						cmtCount
 						);
 				list.add(notice);
@@ -190,6 +219,7 @@ public class NoticeService {
 				String hit=rs.getString("HIT");
 				String files=rs.getString("FILES");
 				String content=rs.getString("CONTENT"); 
+				boolean pub = rs.getBoolean("PUB");
 
 				notice= new Notice(
 						nid,
@@ -198,7 +228,8 @@ public class NoticeService {
 						regdate,
 						hit,
 						files,
-						content
+						content,
+						pub
 						);
 			 	} 
 			 
@@ -253,6 +284,7 @@ public class NoticeService {
 				String hit=rs.getString("HIT");
 				String files=rs.getString("FILES");
 				String content=rs.getString("CONTENT"); 
+				boolean pub = rs.getBoolean("PUB");
 
 				notice= new Notice(
 						nid,
@@ -261,7 +293,8 @@ public class NoticeService {
 						regdate,
 						hit,
 						files,
-						content
+						content,
+						pub
 						);
 			 	} 
 			 
@@ -310,6 +343,7 @@ public class NoticeService {
 				String hit=rs.getString("HIT");
 				String files=rs.getString("FILES");
 				String content=rs.getString("CONTENT"); 
+				boolean pub = rs.getBoolean("PUB");
 
 				notice= new Notice(
 						nid,
@@ -318,7 +352,8 @@ public class NoticeService {
 						regdate,
 						hit,
 						files,
-						content
+						content,
+						pub
 						);
 			 	} 
 			 
@@ -335,6 +370,44 @@ public class NoticeService {
 		
 		
 		return notice;
+	}
+	/**
+	 * @param ids
+	 * @return
+	 */
+	public int deleteNoticeAll(int[] ids) {
+		
+		int result = 0;
+		
+		String params = "";
+		
+		for(int i=0; i< ids.length; i++) {
+			params += ids[i];
+			
+			if(i < ids.length-1)
+				params += ",";
+		}
+		
+		String sql = "DELETE NOTICE1 WHERE ID IN ("+params+")";
+		
+
+		String url = "jdbc:oracle:thin:@10.10.0.131:1521:M2";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con= DriverManager.getConnection(url, "cli", "cli1993");
+			Statement st = con.createStatement();
+			//System.out.println(sql);
+			result = st.executeUpdate(sql);
+
+				st.close();
+				con.close();
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return result;
 	}	
 	
 }

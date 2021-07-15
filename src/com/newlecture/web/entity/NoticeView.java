@@ -29,9 +29,9 @@ public class NoticeView extends Notice {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public NoticeView(int id, String title, String writerId, Date regdate, String hit, String files, int cmtCount) {
+	public NoticeView(int id, String title, String writerId, Date regdate, String hit, String files, boolean pub, int cmtCount) {
 		
-		super(id, title, writerId, regdate, hit, files, "");
+		super(id, title, writerId, regdate, hit, files, "", pub);
 		this.cmtCount = cmtCount;
 	}
 

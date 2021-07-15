@@ -22,6 +22,34 @@ import com.newlecture.web.service.NoticeService;
 
 @WebServlet("/admin/notice/list")
 public class ListController extends HttpServlet{
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String[] openIds = request.getParameterValues("open-id");
+		String[] delIds = request.getParameterValues("del-id");
+		String cmd = request.getParameter("cmd");
+	
+		switch(cmd) {
+		
+		case "ÀÏ°ý°ø°³":
+				
+			break;
+			
+		case "ÀÏ°ý»èÁ¦":
+			NoticeService service = new NoticeService();
+			int[] ids = new int[delIds.length];
+			for(int i=0; i<delIds.length; i++)
+				ids[i] = Integer.parseInt(delIds[i]);
+			
+			int result = service.deleteNoticeAll(ids);
+			break;
+		}
+		
+		response.sendRedirect("list");
+	
+	}
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//list?f=title&q=a
